@@ -1,0 +1,30 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - data/dataset_v1.csv
+    - src/preprocess.py
+    params:
+    - data.input
+    outs:
+    - data/processed.csv
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/processed.csv
+    - src/train.py
+    params:
+    - models
+    - split
+    outs:
+    - model.pkl
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - model.pkl
+    - src/evaluate.py
+    outs:
+    - report.csv
+    metrics:
+    - metrics.json:
+        cache: false
