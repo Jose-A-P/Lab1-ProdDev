@@ -2,9 +2,8 @@ import pandas as pd
 import yaml, json
 import joblib
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import root_mean_squared_error
+from sklearn.linear_model import LinearRegression
 
 params = yaml.safe_load(open("params.yaml"))
 df = pd.read_csv("data/processed.csv")
@@ -25,18 +24,16 @@ best_score = -1
 best_name = ""
 
 for name, cfg in models_cfg.items():
-    if name == "random_forest":
-        model = RandomForestClassifier(**cfg)
-    elif name == "logistic_regression":
-        model = LogisticRegression(**cfg)
+    if name == "linear_regression":
+        model = LinearRegression()
     else:
         continue
 
     model.fit(X_train, y_train)
     preds = model.predict(X_test)
-    score = accuracy_score(y_test, preds)
+    score = root_mean_squared_error(y_test, preds)
 
-    results[name] = {"accuracy": score}
+    results[name] = {"RMSE": score}
 
     if score > best_score:
         best_score = score
@@ -45,4 +42,4 @@ for name, cfg in models_cfg.items():
 
 joblib.dump(best_model, "model.pkl")
 json.dump(results, open("metrics.json", "w"), indent=4)
-print(f"El mejor modelo es: {best_name} con un accuracy de {best_score:.4f}")
+print(f"El mejor modelo es: {best_name} con un RMSE de {best_score:.4f}")

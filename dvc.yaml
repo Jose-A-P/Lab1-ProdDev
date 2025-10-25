@@ -18,6 +18,9 @@ stages:
     - split
     outs:
     - model.pkl
+    metrics:
+    - metrics.json:
+        cache: false
   evaluate:
     cmd: python src/evaluate.py
     deps:
@@ -25,6 +28,3 @@ stages:
     - src/evaluate.py
     outs:
     - report.csv
-    metrics:
-    - metrics.json:
-        cache: false
