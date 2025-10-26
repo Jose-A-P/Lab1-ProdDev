@@ -28,31 +28,40 @@ stages:
       size: 1910089
     - path: src/train.py
       hash: md5
-      md5: f03f7d879987a4d2d26b2216f5076d07
-      size: 1213
+      md5: 93f4568c8711125623e08dcb302372c6
+      size: 1755
     params:
       params.yaml:
         models:
           linear_regression:
+          random_forest_regressor:
+            n_estimators: 100
+            max_depth: 5
+            random_state: 42
+          gradient_boosting_regressor:
+            n_estimators: 100
+            learning_rate: 0.1
+            max_depth: 3
+            random_state: 42
         split:
           test_size: 0.2
           random_state: 42
     outs:
     - path: metrics.json
       hash: md5
-      md5: f26b2bd9c3fab5f83ec9923c756c26d3
-      size: 75
+      md5: a4a8d658f461e3925f97cb53882a1f69
+      size: 448
     - path: model.pkl
       hash: md5
-      md5: 78aa8b34ac0c308b53963fdad88e7843
-      size: 1033
+      md5: 46ce611eba3e8dc4a1f92ad65753684a
+      size: 142584
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - path: model.pkl
       hash: md5
-      md5: 78aa8b34ac0c308b53963fdad88e7843
-      size: 1033
+      md5: 46ce611eba3e8dc4a1f92ad65753684a
+      size: 142584
     - path: src/evaluate.py
       hash: md5
       md5: e0dd748397e7fa87b7e60b12f7817c38
@@ -60,5 +69,5 @@ stages:
     outs:
     - path: report.csv
       hash: md5
-      md5: 708aa1c6b70b19d84bc3ef6e8bd6cc2e
-      size: 45
+      md5: 808a13b762db6da4edd36c4c022205f3
+      size: 258
