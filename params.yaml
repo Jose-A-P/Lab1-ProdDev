@@ -1,5 +1,5 @@
 data:
-  input: data/dataset_v4.csv
+  input: data/dataset_v2.csv
 
 split:
   test_size: 0.2
