@@ -6,6 +6,8 @@
 - git
 - dvc (>=2.0)
 
+Los datasets se descargan del siguiente enlace: [datasets](https://drive.google.com/drive/folders/1Pg-B2LDOITkfRdNqn20T0Hlynrf91YdI?usp=sharing). Estos deben de ser agregados a la carpeta data.
+
 ### Instalacion
 
 Estos pasos se deben de ejecutar en la terminal, dentro de la carpeta donde se manejara el archivo.
