@@ -2,7 +2,6 @@ stages:
   preprocess:
     cmd: python src/preprocess.py
     deps:
-    - data/dataset_v1.csv
     - src/preprocess.py
     params:
     - data.input
